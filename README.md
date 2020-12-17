@@ -3,7 +3,6 @@
 ### 1. Time series analysis
 1) Cross-correlation with significance test
 2) Moving block analysis
-3) 
 
 ### 2. Vector analysis
 1) EOF
