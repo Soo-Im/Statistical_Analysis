@@ -5,13 +5,12 @@
 
 begin
 
-name		  =	(/"CCSM4"/)
-subject		=	(/"midHolocene","piControl"/)
+name	=	(/"CCSM4"/)
+subject	=	(/"midHolocene","piControl"/)	; Two experiments 
+rad	=	4.*atan(1.)/180.		; radian = pi/180
 
 ; season select
-sson		=	(/"DJF","JJA"/)
-
-rad		=	4.*atan(1.)/180.		; radian = pi/180
+sson	=	(/"DJF","JJA"/)
 
 ; Tropical Region
 sstS	=	-5.
@@ -19,7 +18,7 @@ sstN	=	 5.
 sstL	=	-180.
 sstR	=	 180.	
 
-do subj	= 0,1						; loop for subject
+do subj	= 0,1						; loop for two subjects
   ;------------Data Handling------------------
   ;---Read Omega, Zonal wind
 	variable	=	"ua"
