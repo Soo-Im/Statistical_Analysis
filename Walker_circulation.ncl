@@ -22,22 +22,20 @@ sstR	=	 180.
 do subj	= 0,1						; loop for subject
   ;------------Data Handling------------------
   ;---Read Omega, Zonal wind
-	variable	  =	"ua"
+	variable	=	"ua"
 	file_name3	=	systemfunc("ls /storage/CMIP5_raw/"+subject(subj)+"/"+name+"/"+variable+"/*regrid*.nc")	
-	file_in3	  =	addfile(file_name3,"r")
-	print("File: "+file_name3)
+	file_in3	=	addfile(file_name3,"r")
 	u_raw		=	lonFlip(file_in3->ua(:,{:30000},{sstS:sstN},:))
 	
-	variable	  =	"wap"
+	variable	=	"wap"
 	file_name3	=	systemfunc("ls /storage/CMIP5_raw/"+subject(subj)+"/"+name+"/"+variable+"/*regrid*.nc")	
-	file_in3	  =	addfile(file_name3,"r")
-	print("File: "+file_name3)
+	file_in3	=	addfile(file_name3,"r")
 	v_raw		=	lonFlip(file_in3->wap(:,{:30000},{sstS:sstN},:))
 
 	;---average over latitude ( time x lev x lon )
 	varlat		=	  u_raw&lat
 	varcost		= 	cos(varlat*rad) 
-	opt			  =	1				; average of non-missing value
+	opt		=	1					; average of non-missing value
 	u_lon		=	dim_avg_wgt_n_Wrap(u_raw,varcost,opt,2)	
 	v_lon		=	dim_avg_wgt_n_Wrap(v_raw,varcost,opt,2)	
 	;printVarSummary(u_lon)
@@ -63,28 +61,28 @@ do subj	= 0,1						; loop for subject
 
 	u_lon!0		=	"month"
 	v_lon!0		=	"month"
-	u_lon&month		=	ispan(0,ntim-1,1)
-	v_lon&month		=	ispan(0,ntim-1,1)
+	u_lon&month	=	ispan(0,ntim-1,1)
+	v_lon&month	=	ispan(0,ntim-1,1)
 
 ;----------------Plot-----------------------
-	; plot
+	; plot directory
 	wks1_name	=	"~/figure/"+name+"_"+subject(subj)+"_Walker"
 	wks1		=	gsn_open_wks("x11",wks1_name)
 	print("plot= "+wks1_name)
-  plot1		=	new(dimsizes(sson)+1,graphic)	; one for annual mean
+	plot1		=	new(dimsizes(sson)+1,graphic)	; one for annual mean
 
 	res     	=   True
 
-  ; Panel frame
-	res@gsnDraw			=	False
-	res@gsnFrame		=	False
+ 	 ; Panel frame
+	res@gsnDraw	=	False
+	res@gsnFrame	=	False
 
 	; shade
-	res@cnFillOn	 	=	True
-	res@cnFillPalette   =   "BlueWhiteOrangeRed"	;MPL_Reds or BlueRed
+	res@cnFillOn		=	True
+	res@cnFillPalette  	=   "BlueWhiteOrangeRed"	;MPL_Reds or BlueRed
 	res@cnLineColor		=	"Gray"
 
-  ; shade intervals
+  	; shade intervals
 	res@cnLevelSelectionMode	=	"ManualLevels"
 	res@cnMaxLevelValF	=	 3.6
 	res@cnMinLevelValF	=	-3.6
@@ -101,18 +99,19 @@ do subj	= 0,1						; loop for subject
 
 	  	; title
 	  	res@gsnLeftString	=	sson(season)
-	    res@gsnRightString	=	"e-11"
+	  	res@gsnRightString	=	"e-11"
 
-      ; plot a season
-  		plot1(season+1)	=	gsn_csm_pres_hgt_vector(wks1,v_ann,u_ann,v_ann,res)
+    		  ; plot a season
+  		plot1(season+1)		=	gsn_csm_pres_hgt_vector(wks1,v_ann,u_ann,v_ann,res)
 
 	  	delete([/u_mean,v_mean/])	
 	
 	  end do 	; loop for season
 
-  ; Frame and draw Panels
-	resP					=	True
-	resP@gsnMaximize		=	True
+
+  	; Frame and draw Panels
+	resP			=	True
+	resP@gsnMaximize	=	True
 	resP@gsnPanelLabelBar	=	True
 	resP@gsnPanelMainString	=	subject(subj)+" Walker cell"
 	resP@gsnPanelYWhiteSpacePercent	=	5.
