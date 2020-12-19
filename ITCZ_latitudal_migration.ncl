@@ -6,10 +6,10 @@
 
 begin
 
-name		=	"CCSM4"
-subject		=	(/"piControl","midHolocene"/)			; experiments
+name	=	"CCSM4"
+subject	=	(/"piControl","midHolocene"/)			; experiments
 
-rad			=	4.*atan(1.)/180.									; radian = pi/180
+rad	=	4.*atan(1.)/180.									; radian = pi/180
 
 ; Region
 sstS	=	-15.
@@ -40,7 +40,7 @@ do subj	= 0,1						; loop for subject
 	prc_raw		=	dtrend_msg_n(prc_raw&time,prc_raw,False,False,0)
 
 	; land mask
-	in		=   addfile("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+	in	=   addfile("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
 	lsdata  =   in->LSMASK
 	lsm 	=   landsea_mask(lsdata,prc_raw&lat,prc_raw&lon)
 	prc_raw	=   mask(prc_raw,conform(prc_raw,lsm,(/1,2/)).eq.1,0)
@@ -54,15 +54,15 @@ do subj	= 0,1						; loop for subject
 	prc_zon		=	dim_avg_n_Wrap(prc_clm,2)	
  
 	; assign time coordinate
-	prc_zon!0		=	"month"
+	prc_zon!0	=	"month"
 	prc_zon&month	=	ispan(1,12,1)
 
 	delete([/prc_raw,prc_clm/])
 
 ;-------------------------------------------------
 	;--------plot climatological precipitation
-	wks1_name		=	"~/"+name+"_"+subject(subj)+"_zonal_mean_precipitation"
-	wks1			=	gsn_open_wks("x11",wks1_name)
+	wks1_name	=	"~/"+name+"_"+subject(subj)+"_zonal_mean_precipitation"
+	wks1		=	gsn_open_wks("x11",wks1_name)
 	print("plot= "+wks1_name)
 	
 	res     	=   True
@@ -72,7 +72,7 @@ do subj	= 0,1						; loop for subject
 	res@cnFillOn	 	=	True
 	res@cnLineLabelsOn	=	False
 	res@cnLinesOn		=	False
-	res@cnFillPalette   = "MPL_Oranges"	
+	res@cnFillPalette	= "MPL_Oranges"	
 ;	res@cnLineColor		=	"Gray"
 
 	; title
@@ -94,7 +94,7 @@ do subj	= 0,1						; loop for subject
 	; dim_maxind function can take only dim=0, so we need to exchange lat and month dimension.
 
 	;--------find maximum precipitation location
-	prc_zon_inv		=	prc_zon(lat|:,month|:)						; exchange lat and month dimension
+	prc_zon_inv	=	prc_zon(lat|:,month|:)						; exchange lat and month dimension
 	itcz(subj,:)	=	prc_zon&lat( dim_maxind(prc_zon_inv,0) )
 	
 	print(itcz(subj,:))
@@ -122,15 +122,15 @@ res			=	True
 
 ; Axis
 res@tiYAxisString	=	""
-res@trYMinF			=	-7.
-res@trYMaxF			=	 13.
+res@trYMinF		=	-7.
+res@trYMaxF		=	 13.
 
 res@tiXAxisString	=	"Calnedar Month"
 res@tmXBMode		=	"Explicit"
 res@tmXBValues		=	itcz&month
 res@tmXBLabels		=	(/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"/)
-res@trXMinF			=	1
-res@trXMaxF			=	12
+res@trXMinF		=	1
+res@trXMaxF		=	12
 res@tmXBLabelAngleF	=	-45	
 
 ; title
@@ -145,10 +145,10 @@ res@xyLineColors	=	(/"tomato","dodgerblue"/)
 res@xyLineThicknesses	=	(/3.,3./)
 
 ; Grid
-res@tmXMajorGrid	=	True
-res@tmYMajorGrid	=	True
-res@tmXMajorGridThicknessF		=	1.0
-res@tmYMajorGridThicknessF		=	1.0
+res@tmXMajorGrid		=	True
+res@tmYMajorGrid		=	True
+res@tmXMajorGridThicknessF	=	1.0
+res@tmYMajorGridThicknessF	=	1.0
 res@tmXMajorGridLineDashPattern	=	2
 res@tmYMajorGridLineDashPattern	=	2
 
