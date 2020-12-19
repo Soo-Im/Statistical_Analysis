@@ -6,10 +6,10 @@
 
 begin
 
-name			=	"CCSM4"
+name		=	"CCSM4"
 subject		=	(/"piControl","midHolocene"/)			; experiments
 
-rad				=	4.*atan(1.)/180.									; radian = pi/180
+rad			=	4.*atan(1.)/180.									; radian = pi/180
 
 ; Region
 sstS	=	-15.
@@ -54,26 +54,26 @@ do subj	= 0,1						; loop for subject
 	prc_zon		=	dim_avg_n_Wrap(prc_clm,2)	
  
 	; assign time coordinate
-	prc_zon!0	=	"month"
+	prc_zon!0		=	"month"
 	prc_zon&month	=	ispan(1,12,1)
 
 	delete([/prc_raw,prc_clm/])
 
 ;-------------------------------------------------
 	;--------plot climatological precipitation
-	wks1_name	=	"~/"+name+"_"+subject(subj)+"_zonal_mean_precipitation"
+	wks1_name		=	"~/"+name+"_"+subject(subj)+"_zonal_mean_precipitation"
 	wks1			=	gsn_open_wks("x11",wks1_name)
 	print("plot= "+wks1_name)
 	
 	res     	=   True
 	
 	; shade
-	res@cnFillOn	 			=	True
-	res@cnFillOn	 			=	True
+	res@cnFillOn	 	=	True
+	res@cnFillOn	 	=	True
 	res@cnLineLabelsOn	=	False
-	res@cnLinesOn				=	False
+	res@cnLinesOn		=	False
 	res@cnFillPalette   = "MPL_Oranges"	
-;	res@cnLineColor			=	"Gray"
+;	res@cnLineColor		=	"Gray"
 
 	; title
 	res@tiMainString	=	"Zonal mean Precipitation"	
@@ -81,7 +81,7 @@ do subj	= 0,1						; loop for subject
 	res@gsnRightString	=	""	
 
 	; axis
-	res@tmXBMode			=	"Explicit"
+	res@tmXBMode		=	"Explicit"
 	res@tmXBValues		=	prc_zon&month
 	res@tmXBLabels		=	prc_zon&month
 	res@tiXAxisString	=	"Calendar month"
@@ -94,7 +94,7 @@ do subj	= 0,1						; loop for subject
 	; dim_maxind function can take only dim=0, so we need to exchange lat and month dimension.
 
 	;--------find maximum precipitation location
-	prc_zon_inv		=	prc_zon(lat|:,month|:)										; exchange lat and month dimension
+	prc_zon_inv		=	prc_zon(lat|:,month|:)						; exchange lat and month dimension
 	itcz(subj,:)	=	prc_zon&lat( dim_maxind(prc_zon_inv,0) )
 	
 	print(itcz(subj,:))
@@ -108,19 +108,19 @@ delete([/wks1_name,wks1,res,plot1/])
 	
 	
 ;-------------------------------------------------
-;--------plot ITCZs in two experiments at once
-itcz!1			=	"month"
+;--------assign month dimension in itcz storage
+itcz!1		=	"month"
 itcz&month	=	ispan(1,12,1)
 
+;--------plot ITCZs in two experiments at once
 wks1_name	=	"~/ITCZ_migration"
-wks1			=	gsn_open_wks("png",wks1_name)
+wks1		=	gsn_open_wks("png",wks1_name)
 print("plot= "+wks1_name)
 	
 ; plot resource
 res			=	True
 
 ; Axis
-
 res@tiYAxisString	=	""
 res@trYMinF			=	-7.
 res@trYMaxF			=	 13.
@@ -131,12 +131,11 @@ res@tmXBValues		=	itcz&month
 res@tmXBLabels		=	(/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"/)
 res@trXMinF			=	1
 res@trXMaxF			=	12
-res@tmXBLabelAngleF		=	-45		; tilt x label
+res@tmXBLabelAngleF	=	-45	
 
 ; title
 res@tiMainString	=	"Seasonality of ITCZ"
-;res@gsnRightString	=	"Latitude of Maximum zonal mean convection"
-res@gsnRightString	=	"Latitude of Minimum meridional wind"
+res@gsnRightString	=	"Latitude of Maximum zonal mean precipitation"
 
 ; Line
 res@xyMarkLineMode	=	"MarkLines"
@@ -162,7 +161,7 @@ res@pmLegendWidthF         = 0.15                ; Change width and
 res@pmLegendHeightF        = 0.10                ; height of legend.
 res@lgPerimOn              = False               ; turn off box around
 res@lgLabelFontHeightF     = .01                 ; label font height
-res@xyExplicitLegendLabels	=	(/subject(0),subject(1)/)
+res@xyExplicitLegendLabels =	(/subject(0),subject(1)/)
 
 plot1	=	gsn_csm_xy(wks1,itcz&month,itcz,res)
 
