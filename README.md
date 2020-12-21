@@ -12,7 +12,7 @@
 1) Regression map with significance test
 2) Vector divergence map
 
-<img src="https://user-images.githubusercontent.com/40853572/102779495-aaf2ca80-43d7-11eb-9b40-7fc32c8efc26.png" width="500" height="500">
+<img src="https://user-images.githubusercontent.com/40853572/102780178-d6c28000-43d8-11eb-93d0-c20cce088f15.png" width="500" height="500">
 
 ### 4. Other statistics
 1) Scatter plot and linear regression line with significance test
