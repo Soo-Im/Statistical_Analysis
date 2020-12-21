@@ -12,6 +12,8 @@
 1) Regression map with significance test
 2) Vector divergence map
 
+![CCSM4_midHolocene_regmap_SLP_windstressNino3_SON](https://user-images.githubusercontent.com/40853572/102779495-aaf2ca80-43d7-11eb-9b40-7fc32c8efc26.png)
+
 ### 4. Other statistics
 1) Scatter plot and linear regression line with significance test
 2) Significance test for two inear regression coefficients difference
