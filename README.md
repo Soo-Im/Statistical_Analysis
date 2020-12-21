@@ -6,12 +6,12 @@
 
 ### 2. Vector analysis
 1) EOF
-<img src="https://user-images.githubusercontent.com/40853572/102780977-3ec59600-43da-11eb-9768-f4f4d0657980.png" width="500" height="200">
+<img src="https://user-images.githubusercontent.com/40853572/102780977-3ec59600-43da-11eb-9768-f4f4d0657980.png" width="550" height="200">
 2) Rotated-EOF 
 
 ### 3. Spatial analysis
 1) Regression map with significance test
-<img src="https://user-images.githubusercontent.com/40853572/102780178-d6c28000-43d8-11eb-93d0-c20cce088f15.png" width="500" height="500">
+<img src="https://user-images.githubusercontent.com/40853572/102780178-d6c28000-43d8-11eb-93d0-c20cce088f15.png" width="300" height="300">
 2) Vector divergence map
 
 ### 4. Other statistics
