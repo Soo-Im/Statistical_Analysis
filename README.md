@@ -6,7 +6,7 @@
 
 ### 2. Vector analysis
 1) EOF
-<img src="https://user-images.githubusercontent.com/40853572/102780708-bd6e0380-43d9-11eb-9fc4-81b612842984.png">
+<img src="https://user-images.githubusercontent.com/40853572/102780977-3ec59600-43da-11eb-9768-f4f4d0657980.png" width="500" height="200">
 2) Rotated-EOF 
 
 ### 3. Spatial analysis
