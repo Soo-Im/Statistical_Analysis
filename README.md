@@ -16,6 +16,7 @@
 
 ### 4. Other statistics
 1) Scatter plot and linear regression line with significance test
+<img src= "https://user-images.githubusercontent.com/40853572/102781474-14c0a380-43db-11eb-9b9f-2d4ebf46d823.png" width="300" height="300">
 2) Significance test for two inear regression coefficients difference
 
 ### 5. Climate studies
